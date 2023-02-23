@@ -7,13 +7,15 @@ const {
   DB_PASSWORD_DEV,
   DB_NAME_DEV,
   DB_USER_DEV,
+  DB_HOST_DEV,
+  DB_HOST,
 } = process.env;
 
 const development = {
   username: DB_USER_DEV,
   password: DB_PASSWORD_DEV,
   database: DB_NAME_DEV,
-  host: '127.0.0.1',
+  host: DB_HOST_DEV,
   dialect: 'mysql',
 };
 
@@ -21,7 +23,7 @@ const production = {
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  host: '127.0.0.1',
+  host: DB_HOST,
   dialect: 'mysql',
 };
 
