@@ -13,11 +13,22 @@ const createPost = async (req, res, next) => {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/Post" },
+                schema: { $ref: "#/components/schemas/CreatePost" },
             }
         }
     }
   */
+  /* #swagger.responses[200] = {
+        description: "Ok",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/Post"
+                }
+            }
+        }
+    }
+*/
   // #swagger.responses[200] = { description: 'Ok' }
   // #swagger.responses[404] = { description: 'User not found' }
   // #swagger.responses[400] = { description: 'Invalid input' }
@@ -48,7 +59,6 @@ const createPost = async (req, res, next) => {
 
   let newPost;
   try {
-    console.log(`userid는${user.id}`);
     newPost = await Post.create({ userId: user.id, content, toUser });
   } catch (err) {
     const error = new HttpError(
@@ -66,6 +76,23 @@ const getAllPosts = async (req, res, next) => {
   // #swagger.tags = ['Post']
   // #swagger.summary = 'Get all Posts'
   // #swagger.operationId = 'getAllPosts'
+  /* #swagger.parameters['toUser'] = {
+        description: "toUser",
+        in: "path",
+        required: true,
+        type: "string",
+} */
+  /* #swagger.responses[200] = {
+        description: "Ok",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/Post"
+                }
+            }
+        }
+    }
+*/
   /* #swagger.responses[200] = { description: 'Ok' }
   #swagger.responses[404] = { description: 'no posts found' }
   #swagger.responses[500] = { description: 'Something went wrong, please try again' }
@@ -103,15 +130,32 @@ const updatePostById = async (req, res, next) => {
   // #swagger.tags = ['Post']
   // #swagger.summary = 'Update single Post'
   // #swagger.operationId = 'updatePostById'
+  /* #swagger.parameters['postId'] = {
+      description: "postId",
+      in: "path",
+      required: true,
+      type: "string",
+} */
   /* #swagger.requestBody = {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/Post" },
+                schema: { $ref: "#/components/schemas/UpdatePost" },
             }
         }
     }
   */
+  /* #swagger.responses[200] = {
+        description: "Ok",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/Post"
+                }
+            }
+        }
+    }
+*/
   // #swagger.responses[200] = { description: 'Ok' }
   // #swagger.responses[404] = { description: 'Post not found' }
   // #swagger.responses[500] = { description: 'post registration failed, please try again' }
@@ -132,7 +176,7 @@ const deletePostById = async (req, res, next) => {
   // #swagger.tags = ['Post']
   // #swagger.summary = 'Soft delete post'
   /* #swagger.parameters['postId'] = {
-          description: "resource id",
+          description: "post id",
           in: "path",
           required: true,
           type: "string",

@@ -43,7 +43,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           },
           "404": {
             "description": "User not found"
@@ -63,7 +70,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           },
           "201": {
             "description": "Created"
@@ -83,7 +97,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserCreate"
               }
             }
           }
@@ -143,12 +157,12 @@
             "schema": {
               "type": "string"
             },
-            "description": "resource id"
+            "description": "user id"
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "Updated User",
             "content": {
               "application/json": {
                 "schema": {
@@ -172,7 +186,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserUpdate"
               }
             }
           }
@@ -192,7 +206,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "resource id"
+            "description": "user id"
           }
         ],
         "responses": {
@@ -226,6 +240,22 @@
         "parameters": [
           {
             "name": "toUser",
+            "description": "toUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "content",
             "in": "query",
             "schema": {
               "type": "string"
@@ -234,7 +264,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
           },
           "404": {
             "description": "no posts found"
@@ -254,7 +291,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
           },
           "201": {
             "description": "Created"
@@ -274,7 +318,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Post"
+                "$ref": "#/components/schemas/CreatePost"
               }
             }
           }
@@ -296,12 +340,20 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "postId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
           },
           "404": {
             "description": "Post not found"
@@ -315,7 +367,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Post"
+                "$ref": "#/components/schemas/UpdatePost"
               }
             }
           }
@@ -335,7 +387,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "resource id"
+            "description": "post id"
           }
         ],
         "responses": {
@@ -364,73 +416,177 @@
       "User": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "properties": {
+          "id": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "integer"
-                  }
-                }
+              "type": {
+                "type": "string",
+                "example": "integer"
+              }
+            }
+          },
+          "name": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               },
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "email": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               },
-              "email": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "url": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               },
-              "url": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "introduction": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               },
-              "introduction": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "maxLength": {
+                "type": "number",
+                "example": 200
+              }
+            }
+          }
+        }
+      },
+      "UserCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "email": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "url": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "introduction": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "maxLength": {
+                "type": "number",
+                "example": 200
+              }
+            }
+          }
+        }
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "url": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "introduction": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "maxLength": {
+                "type": "number",
+                "example": 200
               }
             }
           }
@@ -439,51 +595,113 @@
       "Post": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "properties": {
+          "id": {
             "type": "object",
             "properties": {
-              "content": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "type": {
+                "type": "string",
+                "example": "integer"
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               },
-              "userId": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "integer"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "userId": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "integer"
               },
-              "toUser": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "required": {
-                    "type": "boolean",
-                    "example": true
-                  }
-                }
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "toUser": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        }
+      },
+      "CreatePost": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "toUser": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        }
+      },
+      "UpdatePost": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
               }
             }
           }

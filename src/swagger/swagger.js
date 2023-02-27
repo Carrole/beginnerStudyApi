@@ -24,44 +24,96 @@ const options = {
   components: {
     schemas: {
       User: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'integer',
-          },
-          name: {
-            type: 'string',
-            required: true,
-          },
-          email: {
-            type: 'string',
-            required: true,
-          },
-          url: {
-            type: 'string',
-            required: true,
-          },
-          introduction: {
-            type: 'string',
-            required: true,
-          },
+        id: {
+          type: 'integer',
+        },
+        name: {
+          type: 'string',
+          required: true,
+        },
+        email: {
+          type: 'string',
+          required: true,
+        },
+        url: {
+          type: 'string',
+          required: true,
+        },
+        introduction: {
+          type: 'string',
+          required: true,
+          maxLength: 200,
+        },
+      },
+      UserCreate: {
+        name: {
+          type: 'string',
+          required: true,
+        },
+        email: {
+          type: 'string',
+          required: true,
+        },
+        url: {
+          type: 'string',
+          required: true,
+        },
+        introduction: {
+          type: 'string',
+          required: true,
+          maxLength: 200,
+        },
+      },
+      UserUpdate: {
+        email: {
+          type: 'string',
+          required: true,
+        },
+        url: {
+          type: 'string',
+          required: true,
+        },
+        introduction: {
+          type: 'string',
+          required: true,
+          maxLength: 200,
         },
       },
       Post: {
-        type: 'object',
-        properties: {
-          content: {
-            type: 'string',
-            required: true,
-          },
-          userId: {
-            type: 'integer',
-            required: true,
-          },
-          toUser: {
-            type: 'string',
-            required: true,
-          },
+        id: {
+          type: 'integer',
+        },
+        content: {
+          type: 'string',
+          required: true,
+        },
+        userId: {
+          type: 'integer',
+          required: true,
+        },
+        toUser: {
+          type: 'string',
+          required: true,
+        },
+      },
+      CreatePost: {
+        userName: {
+          type: 'string',
+          required: true,
+        },
+        content: {
+          type: 'string',
+          required: true,
+        },
+        toUser: {
+          type: 'string',
+          required: true,
+        },
+      },
+      UpdatePost: {
+        content: {
+          type: 'string',
+          required: true,
         },
       },
     },

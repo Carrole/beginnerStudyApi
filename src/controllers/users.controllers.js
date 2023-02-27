@@ -12,11 +12,22 @@ const createUser = async (req, res, next) => {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/User" },
+                schema: { $ref: "#/components/schemas/UserCreate" },
             }
         }
     }
   */
+  /* #swagger.responses[200] = {
+        description: "Ok",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/User"
+                }
+            }
+        }
+    }
+*/
   // #swagger.responses[200] = { description: 'Ok' }
   // #swagger.responses[409] = { description: 'User with the provided email already exists' }
   // #swagger.responses[400] = { description: 'Invalid input' }
@@ -68,6 +79,17 @@ const getAllUsers = async (req, res, next) => {
   // #swagger.tags = ['User']
   // #swagger.summary = 'Get all users'
   // #swagger.operationId = 'getUsers'
+  /* #swagger.responses[200] = {
+        description: "Ok",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/User"
+                }
+            }
+        }
+    }
+*/
   // #swagger.responses[200] = { description: 'Ok' }
   // #swagger.responses[404] = { description: 'User not found' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
@@ -120,7 +142,7 @@ const getUserById = async (req, res, next) => {
 const updateUserById = async (req, res, next) => {
   // #swagger.tags = ['User']
   // #swagger.summary = "Update user data. Put all 'customData' as whole if editing columns other than 'name'"
-  // #swagger.operationId = updateUser'
+  // #swagger.operationId = 'updateUser'
   /* #swagger.parameters['userId'] = {
           description: "user id",
           in: "path",
@@ -131,7 +153,7 @@ const updateUserById = async (req, res, next) => {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/User" },
+                schema: { $ref: "#/components/schemas/UserUpdate" },
             }
         }
     }
@@ -191,7 +213,7 @@ const deleteUserById = async (req, res, next) => {
   // #swagger.tags = ['User']
   // #swagger.summary = 'Soft delete user'
   /* #swagger.parameters['userId'] = {
-          description: "resource id",
+          description: "user id",
           in: "path",
           required: true,
           type: "string",
