@@ -192,7 +192,7 @@ const deletePostById = async (req, res, next) => {
           }
       }
   */
-  // #swagger.responses[404] = { description: 'Could not find user with the provided id' }
+  // #swagger.responses[404] = { description: 'Could not find post with the provided id' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
   try {
     const post = await Post.findByPk(req.params);
