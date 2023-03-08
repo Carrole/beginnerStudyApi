@@ -160,8 +160,9 @@ const updatePostById = async (req, res, next) => {
   // #swagger.responses[404] = { description: 'Post not found' }
   // #swagger.responses[500] = { description: 'post registration failed, please try again' }
   const errors = validationResult(req);
+  const { postId } = req.params;
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(postId);
     if (!post) {
       return next(new HttpError(404, 'Post not found'));
     }
@@ -194,8 +195,11 @@ const deletePostById = async (req, res, next) => {
   */
   // #swagger.responses[404] = { description: 'Could not find post with the provided id' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
+
+  const { postId } = req.params;
+
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(postId);
     if (!post) {
       const error = new HttpError('Post not found', undefined, 404);
       return next(error);
