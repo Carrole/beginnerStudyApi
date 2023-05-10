@@ -52,9 +52,6 @@
               }
             }
           },
-          "404": {
-            "description": "User not found"
-          },
           "500": {
             "description": "Something went wrong, please try again"
           }
@@ -69,7 +66,7 @@
         "operationId": "addUser",
         "parameters": [],
         "responses": {
-          "200": {
+          "201": {
             "description": "Ok",
             "content": {
               "application/json": {
@@ -78,9 +75,6 @@
                 }
               }
             }
-          },
-          "201": {
-            "description": "Created"
           },
           "400": {
             "description": "Invalid input"
@@ -97,7 +91,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserCreate"
+                "$ref": "#/components/schemas/CreateUser"
               }
             }
           }
@@ -171,11 +165,11 @@
               }
             }
           },
+          "400": {
+            "description": "Invalid input"
+          },
           "404": {
             "description": "Could not find user with the provided id"
-          },
-          "442": {
-            "description": "Invalid input"
           },
           "500": {
             "description": "Something went wrong, please try again"
@@ -186,7 +180,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserUpdate"
+                "$ref": "#/components/schemas/UpdateUser"
               }
             }
           }
@@ -290,8 +284,8 @@
         "operationId": "addPost",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Ok",
+          "201": {
+            "description": "Create a new Post",
             "content": {
               "application/json": {
                 "schema": {
@@ -299,9 +293,6 @@
                 }
               }
             }
-          },
-          "201": {
-            "description": "Created"
           },
           "400": {
             "description": "Invalid input"
@@ -355,6 +346,9 @@
               }
             }
           },
+          "400": {
+            "description": "Invalid input"
+          },
           "404": {
             "description": "Post not found"
           },
@@ -402,7 +396,7 @@
             }
           },
           "404": {
-            "description": "Could not find user with the provided id"
+            "description": "Could not find post with the provided id"
           },
           "500": {
             "description": "Something went wrong, please try again"
@@ -431,10 +425,6 @@
               "type": {
                 "type": "string",
                 "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
               }
             }
           },
@@ -444,10 +434,6 @@
               "type": {
                 "type": "string",
                 "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
               }
             }
           },
@@ -457,10 +443,6 @@
               "type": {
                 "type": "string",
                 "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
               }
             }
           },
@@ -470,20 +452,12 @@
               "type": {
                 "type": "string",
                 "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
-              },
-              "maxLength": {
-                "type": "number",
-                "example": 200
               }
             }
           }
         }
       },
-      "UserCreate": {
+      "CreateUser": {
         "type": "object",
         "properties": {
           "name": {
@@ -544,7 +518,7 @@
           }
         }
       },
-      "UserUpdate": {
+      "UpdateUser": {
         "type": "object",
         "properties": {
           "email": {
@@ -604,29 +578,21 @@
               }
             }
           },
-          "content": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
-              }
-            }
-          },
           "userId": {
             "type": "object",
             "properties": {
               "type": {
                 "type": "string",
                 "example": "integer"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "string"
               }
             }
           },
@@ -636,10 +602,24 @@
               "type": {
                 "type": "string",
                 "example": "string"
-              },
-              "required": {
-                "type": "boolean",
-                "example": true
+              }
+            }
+          },
+          "updatedAt": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "datetime"
+              }
+            }
+          },
+          "createdAt": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "datetime"
               }
             }
           }

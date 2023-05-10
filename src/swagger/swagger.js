@@ -29,23 +29,18 @@ const options = {
         },
         name: {
           type: 'string',
-          required: true,
         },
         email: {
           type: 'string',
-          required: true,
         },
         url: {
           type: 'string',
-          required: true,
         },
         introduction: {
           type: 'string',
-          required: true,
-          maxLength: 200,
         },
       },
-      UserCreate: {
+      CreateUser: {
         name: {
           type: 'string',
           required: true,
@@ -64,7 +59,7 @@ const options = {
           maxLength: 200,
         },
       },
-      UserUpdate: {
+      UpdateUser: {
         email: {
           type: 'string',
           required: true,
@@ -83,17 +78,20 @@ const options = {
         id: {
           type: 'integer',
         },
-        content: {
-          type: 'string',
-          required: true,
-        },
         userId: {
           type: 'integer',
-          required: true,
+        },
+        content: {
+          type: 'string',
         },
         toUser: {
           type: 'string',
-          required: true,
+        },
+        updatedAt: {
+          type: 'datetime',
+        },
+        createdAt: {
+          type: 'datetime',
         },
       },
       CreatePost: {

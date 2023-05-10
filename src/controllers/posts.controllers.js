@@ -18,8 +18,8 @@ const createPost = async (req, res, next) => {
         }
     }
   */
-  /* #swagger.responses[200] = {
-        description: "Ok",
+  /* #swagger.responses[201] = {
+        description: "Create a new Post",
         content: {
             "application/json": {
                 schema:{
@@ -29,7 +29,7 @@ const createPost = async (req, res, next) => {
         }
     }
 */
-  // #swagger.responses[200] = { description: 'Ok' }
+  // #swagger.responses[201] = { description: 'Create a new Post' }
   // #swagger.responses[404] = { description: 'User not found' }
   // #swagger.responses[400] = { description: 'Invalid input' }
   // #swagger.responses[500] = { description: 'post registration failed, please try again' }
@@ -122,7 +122,6 @@ const getAllPosts = async (req, res, next) => {
       return next(error);
     }
   }
-
   res.status(200).send(posts);
 };
 
@@ -157,9 +156,13 @@ const updatePostById = async (req, res, next) => {
     }
 */
   // #swagger.responses[200] = { description: 'Ok' }
+  // #swagger.responses[400] = { description: 'Invalid input' }
   // #swagger.responses[404] = { description: 'Post not found' }
   // #swagger.responses[500] = { description: 'post registration failed, please try again' }
   const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid input', errors.array()[0].msg, 400));
+  }
   const { postId } = req.params;
   try {
     const post = await Post.findByPk(postId);
@@ -168,8 +171,9 @@ const updatePostById = async (req, res, next) => {
     }
     await post.update(req.body);
     res.status(200).send(post);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    const error = new HttpError('something went wrong', err.message, 500);
+    return next(error);
   }
 };
 

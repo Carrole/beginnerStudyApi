@@ -12,12 +12,12 @@ const createUser = async (req, res, next) => {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/UserCreate" },
+                schema: { $ref: "#/components/schemas/CreateUser" },
             }
         }
     }
   */
-  /* #swagger.responses[200] = {
+  /* #swagger.responses[201] = {
         description: "Ok",
         content: {
             "application/json": {
@@ -28,7 +28,7 @@ const createUser = async (req, res, next) => {
         }
     }
 */
-  // #swagger.responses[200] = { description: 'Ok' }
+  // #swagger.responses[201] = { description: 'Ok' }
   // #swagger.responses[409] = { description: 'User with the provided email already exists' }
   // #swagger.responses[400] = { description: 'Invalid input' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
@@ -91,7 +91,6 @@ const getAllUsers = async (req, res, next) => {
     }
 */
   // #swagger.responses[200] = { description: 'Ok' }
-  // #swagger.responses[404] = { description: 'User not found' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
   try {
     const users = await User.findAll({});
@@ -153,7 +152,7 @@ const updateUserById = async (req, res, next) => {
         required: true,
         content: {
             "application/json": {
-                schema: { $ref: "#/components/schemas/UserUpdate" },
+                schema: { $ref: "#/components/schemas/UpdateUser" },
             }
         }
     }
@@ -170,8 +169,12 @@ const updateUserById = async (req, res, next) => {
       }
   */
   // #swagger.responses[404] = { description: 'Could not find user with the provided id' }
-  // #swagger.responses[442] = { description: 'Invalid input' }
+  // #swagger.responses[400] = { description: 'Invalid input' }
   // #swagger.responses[500] = { description: 'Something went wrong, please try again' }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid input', errors.array()[0].msg, 400));
+  }
   const { userId } = req.params;
   const { email, url, introduction } = req.body;
   const user = await User.findByPk(userId);
